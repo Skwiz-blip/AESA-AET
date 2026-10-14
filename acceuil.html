@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Agir Ensemble Tour - Les émissions de l'Union européenne au Togo</title>
+  <meta name="description" content="Quatre émissions radio itinérantes à travers le Togo sur l'énergie, l'environnement, l'entrepreneuriat et la culture. Calendrier, replays et podcast.">
+  <meta name="theme-color" content="#0B1F4D">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Agir Ensemble Tour - Les émissions de l'Union européenne au Togo">
+  <meta property="og:description" content="Quatre émissions radio itinérantes à travers le Togo. Posez votre question, elle passe à l'antenne.">
+
+  <script>
+    
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      wait_for_update: 500
+    });
+
+    try {
+      var choixMemorise = JSON.parse(localStorage.getItem("aet-consentement"));
+      var sixMois = 180 * 24 * 60 * 60 * 1000;
+      if (choixMemorise && choixMemorise.statut === "granted" && Date.now() - choixMemorise.date < sixMois) {
+        gtag("consent", "update", {
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+          analytics_storage: "granted"
+        });
+      }
+    } catch (erreur) { }
+  </script>
+  <script>
+    
+    (function () {
+      var ID_GTM = "";
+      if (!ID_GTM) return;
+
+      window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtm.js?id=" + ID_GTM;
+      document.head.appendChild(script);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#contenu">Allez au contenu</a>
+    <hearder class="site-header">
+        <div class="container header-inner">
+            <div class="eu-block">
+                <img src="assets\img\embleme-ue-provisoire.webp" width="60" height="40">
+                <span class="eu-label">Financé par <br> l'union européenne</brW></span>
+            </div>
+        </div>
+    </hearder>
+</body>

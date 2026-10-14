@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Politique de confidentialité - Agir Ensemble Tour</title>
+  <meta name="description" content="Comment le site Agir Ensemble Tour traite vos données : mesure d'audience avec votre accord, messages WhatsApp, vos droits.">
+  <meta name="theme-color" content="#0B1F4D">
+
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+
+    gtag("consent", "default", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+      wait_for_update: 500
+    });
+
+    try {
+      var choixMemorise = JSON.parse(localStorage.getItem("aet-consentement"));
+      var sixMois = 180 * 24 * 60 * 60 * 1000;
+      if (choixMemorise && choixMemorise.statut === "granted" && Date.now() - choixMemorise.date < sixMois) {
+        gtag("consent", "update", {
+          ad_storage: "granted",
+          ad_user_data: "granted",
+          ad_personalization: "granted",
+          analytics_storage: "granted"
+        });
+      }
+    } catch (erreur) { /* stockage indisponible : on reste en refus */ }
+  </script>
+  <script>
+    (function () {
+      var ID_GTM = "";   // même identifiant que dans index.html
+      if (!ID_GTM) return;
+
+      window.dataLayer.push({ "gtm.start": Date.now(), event: "gtm.js" });
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtm.js?id=" + ID_GTM;
+      document.head.appendChild(script);
+    })();
+  </script>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#contenu">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="eu-block">
+        <img src="assets/img/embleme-ue-provisoire.webp" width="60" height="40" alt="Emblème de l'Union européenne">
+        <span class="eu-label">Financé par<br>l'Union européenne</span>
+      </div>
+      <a class="back-link" href="./">Retour au site</a>
+    </div>
+  </header>
+
+  <main id="contenu" class="section">
+    <div class="container legal">
+
+      <h1>Politique de confidentialité</h1>
+      <!-- À remplacer par la date réelle le jour de la mise en ligne -->
+      <p class="updated muted">Dernière mise à jour : [date de mise en ligne]</p>
+
+      <h2>En résumé</h2>
+      <p>
+        Ce site ne vous demande ni compte, ni inscription, ni formulaire. Nous ne vendons aucune
+        donnée et n'en transmettons à aucun tiers à des fins commerciales.
+      </p>
+      <p>
+        Deux choses seulement sont concernées : la mesure d'audience du site, qui ne se déclenche
+        qu'avec votre accord, et les messages que vous nous envoyez volontairement par WhatsApp.
+      </p>
+
+      <h2>1. Qui est responsable du traitement</h2>
+      <address>
+        Live Y Dream<br>
+        Togo 2000, non loin de Bar Le Monde - Lomé, Togo<br>
+        Courriel : <a href="mailto:contact@liveydream.com">contact@liveydream.com</a>
+      </address>
+      <p>
+        Ce site est exploité dans le cadre du marché NDICI AFRICA/2023/443-531, pour le compte d'AESA -
+        Agriconsulting Europe S.A. et de la Délégation de l'Union européenne en République togolaise.
+      </p>
+
+      <h2>2. Les données que nous traitons</h2>
+      <p>
+        <strong>Mesure d'audience.</strong> Lorsque vous acceptez les traceurs, nous recueillons des
+        informations techniques et de navigation : pages consultées, durée de visite, type d'appareil
+        et de navigateur, pays de connexion, site ou publicité par lequel vous êtes arrivé, et actions
+        effectuées sur la page (lecture d'une vidéo, clic vers WhatsApp ou vers une plateforme de
+        podcast). Ces informations ne nous permettent pas de vous identifier personnellement.
+      </p>
+      <p>
+        <strong>Messages WhatsApp.</strong> Si vous choisissez d'envoyer une question à l'émission,
+        nous recevons votre numéro de téléphone, le nom affiché sur votre compte WhatsApp et le
+        contenu de votre message.
+      </p>
+      <p>
+        <strong>Aucun formulaire.</strong> Ce site ne comporte aucun formulaire de saisie. Nous ne
+        collectons ni votre nom, ni votre adresse électronique, ni aucune donnée que vous n'auriez pas
+        choisi de nous envoyer.
+      </p>
+
+      <h2>3. Pourquoi nous les traitons</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Donnée</th><th scope="col">Finalité</th><th scope="col">Base juridique</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Mesure d'audience</td>
+              <td>Comprendre la fréquentation du site et l'efficacité de la campagne de communication</td>
+              <td>Votre consentement</td>
+            </tr>
+            <tr>
+              <td>Traceurs publicitaires</td>
+              <td>Mesurer les résultats des publicités et éviter de vous montrer plusieurs fois le même message</td>
+              <td>Votre consentement</td>
+            </tr>
+            <tr>
+              <td>Messages WhatsApp</td>
+              <td>Alimenter le contenu des émissions et vous informer de la diffusion</td>
+              <td>Votre consentement, donné par l'envoi du message</td>
+            </tr>
+            <tr>
+              <td>Mémorisation de votre choix de consentement</td>
+              <td>Ne pas vous redemander votre choix à chaque visite</td>
+              <td>Nécessaire au fonctionnement du site</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>4. Traceurs et cookies</h2>
+      <p>
+        Aucun traceur de mesure ou de publicité n'est déposé avant que vous ayez fait votre choix.
+        Tant que vous n'avez pas accepté, ces outils restent désactivés.
+      </p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Outil</th><th scope="col">Rôle</th><th scope="col">Durée</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Google Analytics 4</td><td>Mesure d'audience du site</td><td>Jusqu'à 13 mois</td></tr>
+            <tr><td>Pixel Meta</td><td>Mesure des publicités Facebook et Instagram</td><td>Jusqu'à 3 mois</td></tr>
+            <tr><td>Balise Google Ads</td><td>Mesure des publicités YouTube et Display</td><td>Jusqu'à 90 jours</td></tr>
+            <tr><td>Mémorisation de votre choix</td><td>Conserver votre réponse au bandeau</td><td>6 mois</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>Modifier ou retirer votre choix à tout moment.</strong> Vous pouvez revenir sur votre
+        décision en cliquant sur « Gérer mes préférences » en bas de page, ou en supprimant les
+        données de navigation de ce site depuis les réglages de votre navigateur.
+      </p>
+
+      <h2>5. Vos messages WhatsApp</h2>
+      <p>Si vous nous écrivez, voici exactement ce qui se passe.</p>
+      <p>
+        Votre message peut être lu ou cité pendant l'émission correspondante. Si vous ne le souhaitez
+        pas, indiquez-le simplement dans votre message : nous en tiendrons compte.
+      </p>
+      <p>
+        Votre numéro est utilisé pour une seule chose en dehors de cela : vous prévenir de la date de
+        diffusion et de la mise en ligne du replay. Vous recevrez au maximum deux messages par émission.
+      </p>
+      <p>
+        Votre numéro n'est ajouté à aucune liste de diffusion commerciale, n'est transmis à aucun
+        tiers, et n'est utilisé pour aucune autre campagne.
+      </p>
+      <p>Pour ne plus être contacté, répondez « STOP ». Votre numéro est alors retiré immédiatement.</p>
+      <p>
+        Ces échanges transitent par WhatsApp, service fourni par Meta, dont les conditions et la
+        politique de confidentialité s'appliquent indépendamment de la présente politique.
+      </p>
+
+      <h2>6. Qui a accès à ces données</h2>
+      <p>
+        L'équipe de Live Y Dream en charge de la campagne, ainsi qu'AESA et la Délégation de
+        l'Union européenne au Togo pour les statistiques agrégées de fréquentation et de performance.
+      </p>
+      <p>
+        Nos prestataires techniques interviennent comme sous-traitants : Hostinger pour l'hébergement,
+        Google pour la mesure d'audience, Meta pour la mesure publicitaire et la messagerie.
+      </p>
+      <p>
+        Certains de ces prestataires sont établis hors du Togo et traitent des données depuis l'Union
+        européenne ou les États-Unis. Ces transferts sont encadrés par les garanties contractuelles et
+        les mécanismes de conformité propres à chacun de ces prestataires.
+      </p>
+
+      <h2>7. Combien de temps nous les conservons</h2>
+      <p>
+        Les statistiques de fréquentation sont conservées 14 mois, puis supprimées ou conservées
+        uniquement sous forme agrégée et anonyme.
+      </p>
+      <p>
+        Les messages WhatsApp et les numéros associés sont conservés pour la durée de la campagne, puis
+        supprimés ou remis à la Délégation de l'Union européenne au Togo à l'issue de la mission, selon
+        ses instructions.
+      </p>
+
+      <h2>8. Vos droits</h2>
+      <p>
+        Vous pouvez demander à accéder aux données vous concernant, à les faire corriger ou supprimer,
+        à vous opposer à leur traitement ou à en demander la limitation, et à retirer votre
+        consentement à tout moment.
+      </p>
+      <p>
+        Pour exercer ces droits, écrivez à
+        <a href="mailto:contact@liveydream.com">contact@liveydream.com</a> en précisant votre demande.
+        S'il s'agit de vos messages WhatsApp, indiquez le numéro concerné afin que nous puissions les
+        retrouver.
+      </p>
+      <p>Nous répondons dans un délai d'un mois.</p>
+      <p>
+        Si vous estimez que vos droits ne sont pas respectés, vous pouvez saisir l'autorité togolaise
+        compétente en matière de protection des données à caractère personnel.
+      </p>
+
+      <h2>9. Sécurité</h2>
+      <p>
+        Le site est accessible en HTTPS. Les accès aux outils de mesure et au compte de messagerie sont
+        limités aux personnes de l'équipe qui en ont besoin et protégés par authentification.
+      </p>
+
+      <h2>10. Évolution de cette politique</h2>
+      <p>
+        Cette politique peut être mise à jour, notamment si de nouveaux outils de mesure sont ajoutés
+        en cours de campagne. La date figurant en haut de page indique la dernière modification.
+      </p>
+
+      <p>Contact : <a href="mailto:contact@liveydream.com">contact@liveydream.com</a></p>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="eu-block">
+        <img src="assets/img/embleme-ue-provisoire.webp" width="60" height="40" alt="Emblème de l'Union européenne" loading="lazy">
+        <span class="eu-label">Financé par l'Union européenne</span>
+      </div>
+
+      <!-- Clause provisoire, en attente de la formulation validée par AESA -->
+      <p class="disclaimer">
+        Ce site a été réalisé avec le soutien financier de l'Union européenne. Son contenu
+        relève de la seule responsabilité de Live Y Dream et ne reflète pas nécessairement
+        les opinions de l'Union européenne.
+      </p>
+
+      <div class="footer-links">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="confidentialite.html" aria-current="page">Politique de confidentialité</a>
+        <a href="https://www.eeas.europa.eu/delegations/togo_fr" target="_blank" rel="noopener">Délégation de l'Union européenne au Togo</a>
+        <button type="button" id="gerer-preferences" class="link-button">Gérer mes préférences</button>
+      </div>
+
+    </div>
+  </footer>
+
+  <div id="bandeau-consentement" class="consent" role="region" aria-label="Choix des outils de mesure" hidden>
+    <p>
+      Ce site utilise des outils de mesure pour comprendre l'audience de la campagne.
+      Rien n'est activé tant que vous n'avez pas choisi.
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-consent" id="consent-accepter">Accepter</button>
+      <button type="button" class="btn btn-consent" id="consent-refuser">Refuser</button>
+      <a class="link-strong" href="confidentialite.html">En savoir plus</a>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

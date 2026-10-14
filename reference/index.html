@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+  <title>Agir Ensemble Tour - Les émissions de l'Union européenne au Togo</title>
+  <meta name="description" content="Quatre émissions radio itinérantes à travers le Togo sur l'énergie, l'environnement, l'entrepreneuriat et la culture. Calendrier, replays et podcast.">
+
+  <!-- À fournir après validation : image de partage (1200 x 630) et favicon -->
+  <!-- <meta property="og:image" content="images/partage.jpg"> -->
+  <!-- <link rel="icon" href="images/favicon.png"> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <div class="eu-block"> 
+        <span class="eu-label">Financé par<br>l'Union européenne</span>
+      </div>
+ 
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="#haut">Le Tour</a>
+        <a href="#calendrier">Calendrier</a>
+        <a href="#replays">Replays</a>
+        <a class="btn btn-primary" href="#question" data-whatsapp="AET1">Poser ma question</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 2. ACCROCHE ============ -->
+    <section id="haut" class="hero">
+      <div class="container">
+        <p class="eyebrow">Émissions radio itinérantes · Togo</p>
+        <h1>Agir Ensemble Tour</h1>
+        <p class="hero-slogan">La parole circule. Le Tour aussi.</p>
+
+        <p class="hero-text">
+          Quatre émissions de radio itinérantes, à Lomé et dans les villes de l'intérieur,
+          pour parler de ce qui change vraiment : l'énergie, l'environnement,
+          l'entrepreneuriat et la culture.
+        </p>
+        <p class="hero-text strong">
+          Vous écoutez, vous réagissez, vous posez vos questions.
+          Et vos questions passent à l'antenne.
+        </p>
+
+        <div class="hero-actions">
+          <!-- Le lien WhatsApp est rempli par script.js grâce à data-whatsapp -->
+          <a class="btn btn-yellow" href="#question" data-whatsapp="AET1">Je poste ma question</a>
+          <a class="btn btn-outline-white" href="#calendrier">Voir le calendrier</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. LE PARTENARIAT ============ -->
+    <section id="partenariat" class="section">
+      <div class="container partnership">
+        <div>
+          <p class="eyebrow">Le partenariat</p>
+          <h2 class="section-title">Un partenariat qui se voit sur le terrain</h2>
+        </div>
+        <div>
+          <p>
+            Depuis plusieurs années, l'Union européenne, ses États membres et le Togo travaillent
+            ensemble sur l'énergie et la connectivité, la protection de l'environnement,
+            l'agriculture durable, l'entrepreneuriat et la jeunesse.
+          </p>
+          <p>
+            Dans le cadre de la stratégie Global Gateway, ces engagements prennent la forme de
+            projets concrets : des infrastructures durables, des emplois dans l'énergie et le
+            numérique, des opportunités pour les jeunes Togolais.
+          </p>
+          <p>
+            « Agir Ensemble Tour » prolonge la campagne « Agir Ensemble » en allant à la
+            rencontre du public, ville après ville.
+          </p>
+          <p>
+            <a class="link-strong" href="https://www.eeas.europa.eu/togo/l-union-europeenne-et-le-togo_fr" target="_blank" rel="noopener">En savoir plus sur le partenariat UE-Togo →</a><br>
+            <a class="link-strong" href="https://www.eeas.europa.eu/delegations/togo/agirensemble_fr" target="_blank" rel="noopener">Page officielle de la campagne Agir Ensemble →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. CALENDRIER ============ -->
+    <section id="calendrier" class="section bg-soft">
+      <div class="container">
+        <p class="eyebrow">Calendrier</p>
+        <h2 class="section-title">Le Tour, ville par ville</h2>
+        <p class="section-intro muted">
+          Quatre rendez-vous, quatre thèmes, quatre villes. Chaque émission est diffusée en
+          direct, puis disponible en replay et en podcast.
+        </p>
+
+        <!-- Les 4 fiches sont générées par script.js à partir du tableau EMISSIONS -->
+        <div id="liste-emissions" class="grid-4"></div>
+
+        <p class="muted note">
+          Les dates du Tour seront annoncées très bientôt. Laissez-nous votre question en attendant.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 5. THÉMATIQUES ============ -->
+    <section id="themes" class="section">
+      <div class="container">
+        <p class="eyebrow">Thématiques</p>
+        <h2 class="section-title">Quatre secteurs, une même ambition</h2>
+
+        <div class="grid-2">
+          <article class="card theme">
+            <p class="eyebrow">Énergie et connectivité</p>
+            <h3>Agir ensemble pour connecter</h3>
+            <p class="muted">
+              L'accès à l'électricité et à la connectivité change tout : les études, le commerce,
+              la santé, la vie quotidienne. Avec le Gouvernement, l'Union européenne soutient des
+              projets qui rapprochent les territoires et rendent ces services accessibles à tous.
+            </p>
+          </article>
+
+          <article class="card theme">
+            <p class="eyebrow">Environnement</p>
+            <h3>Agir ensemble pour protéger</h3>
+            <p class="muted">
+              Restaurer les forêts, régénérer les sols, impliquer les habitants dans la protection
+              de leur environnement. Des actions concrètes, menées aux côtés du Gouvernement et
+              des communautés.
+            </p>
+          </article>
+
+          <article class="card theme">
+            <p class="eyebrow">Entrepreneuriat et jeunesse</p>
+            <h3>Agir ensemble pour innover</h3>
+            <p class="muted">
+              La jeunesse togolaise a des idées, de l'énergie et de la persévérance. L'Union
+              européenne soutient celles et ceux qui entreprennent, créent des emplois et
+              renforcent le tissu économique du pays.
+            </p>
+          </article>
+
+          <!-- Texte « culture » à faire valider par l'AESA -->
+          <article class="card theme">
+            <p class="eyebrow">Culture et industries créatives</p>
+            <h3>Agir ensemble pour créer</h3>
+            <p class="muted">
+              Musique, cinéma, artisanat, design : les industries culturelles et créatives font
+              vivre les territoires et racontent le Togo au monde. Un secteur soutenu comme un
+              moteur économique à part entière.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. REPLAYS ET PODCAST (V2) ============ -->
+    <section id="replays" class="section bg-soft">
+      <div class="container">
+        <p class="eyebrow">Replays et podcast</p>
+        <h2 class="section-title">Vous avez manqué l'émission ?</h2>
+        <p class="section-intro muted">
+          Chaque émission est disponible en réécoute intégrale, en vidéo et en podcast.
+          Choisissez la plateforme que vous utilisez déjà.
+        </p>
+
+        <!-- Quand AESA fournit un lien : remplacer <span ...> par <a href="LIEN" class="card platform"> -->
+        <div class="platforms">
+          <span class="card platform" title="Bientôt disponible">Spotify</span>
+          <span class="card platform" title="Bientôt disponible">Apple Podcasts</span>
+          <span class="card platform" title="Bientôt disponible">Deezer</span>
+          <span class="card platform" title="Bientôt disponible">YouTube</span>
+          <span class="card platform" title="Bientôt disponible">Écouter sur le site</span>
+        </div>
+
+        <div class="empty">Les replays arriveront après la première émission.</div>
+      </div>
+    </section>
+
+    <!-- ============ 7. CAPSULES (V2) ============ -->
+    <section id="capsules" class="section">
+      <div class="container">
+        <p class="eyebrow">Capsules</p>
+        <h2 class="section-title">Les moments forts</h2>
+        <p class="section-intro muted">Des extraits courts, à regarder en une minute et à partager.</p>
+
+        <!-- Filtre par thème (actif quand des capsules existeront) -->
+        <div class="filters">
+          <button class="tag tag-filter active" type="button">Tous</button>
+          <button class="tag tag-filter" type="button">Énergie</button>
+          <button class="tag tag-filter" type="button">Environnement</button>
+          <button class="tag tag-filter" type="button">Entrepreneuriat</button>
+          <button class="tag tag-filter" type="button">Culture</button>
+        </div>
+
+        <div class="empty">Les capsules apparaîtront ici après les premières émissions.</div>
+      </div>
+    </section>
+
+    <!-- ============ 8. POSER SA QUESTION (conversion principale) ============ -->
+    <section id="question" class="ask">
+      <div class="container">
+        <p class="eyebrow">Poser sa question</p>
+        <h2>Votre question, à l'antenne</h2>
+
+        <p>
+          Vous avez une question, un témoignage, une idée ? Envoyez-la par WhatsApp.
+          Les questions retenues sont lues pendant l'émission.
+        </p>
+        <p class="strong">
+          C'est gratuit, ça prend trente secondes, et vous recevrez un message quand votre
+          émission sera diffusée.
+        </p>
+
+        <a class="btn btn-yellow btn-large" href="#" data-whatsapp="AET1">Envoyer ma question sur WhatsApp</a>
+
+        <p class="notice">
+          En envoyant votre message, vous acceptez que votre question soit lue à l'antenne et que
+          nous vous informions de la diffusion. Votre numéro n'est utilisé pour rien d'autre et
+          n'est transmis à personne.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 9. LES VOIX DE LA CAMPAGNE (V2, à confirmer par AESA) ============ -->
+    <section id="voix" class="section">
+      <div class="container">
+        <p class="eyebrow">Les voix de la campagne</p>
+        <h2 class="section-title">Ceux qui font circuler la parole</h2>
+
+        <div class="grid-3">
+          <article class="card voice">
+            <h3>Jean-Pierre AZANLEDJI</h3>
+            <p class="role muted">Journaliste et chroniqueur</p>
+            <p>
+              Voix reconnue du débat public togolais, il décrypte avec pédagogie les sujets
+              économiques et sociaux qui touchent le quotidien. Sur le Tour, il porte un message
+              simple : comprendre ce qui se construit, et en parler ensemble.
+            </p>
+            <p class="socials muted">Facebook · Instagram (@jeanpier_az)</p>
+          </article>
+
+          <article class="card voice">
+            <h3>Océane Amé CODJA</h3>
+            <p class="role muted">Animatrice radio et télévision</p>
+            <p>
+              Son énergie et sa proximité avec les jeunes en font une figure familière du paysage
+              médiatique togolais. Engagée pour l'entrepreneuriat féminin et les talents locaux,
+              elle accompagne le Tour avec la conviction que l'avenir se construit collectivement.
+            </p>
+            <p class="socials muted">Facebook (@amecodjia)</p>
+          </article>
+
+          <article class="card voice">
+            <h3>Orii Infos</h3>
+            <p class="role muted">Média en ligne</p>
+            <p>
+              Animé par de jeunes journalistes et créateurs de contenu, Orii Infos raconte le Togo
+              qui avance : initiatives locales, innovation, impact social. Partenaire de diffusion
+              du Tour, il relaie les voix de celles et ceux qui agissent.
+            </p>
+            <p class="socials muted">Facebook · Instagram (@orii_infos)</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ 10. PIED DE PAGE ============ -->
+  <footer class="site-footer">
+    <div class="container">
+
+      <div class="eu-block">
+        <svg width="54" height="36" viewBox="0 0 36 24" role="img" aria-label="Drapeau de l'Union européenne">
+          <rect width="36" height="24" fill="#003399"/>
+          <g fill="#FFCC00">
+            <circle cx="26"   cy="12"   r="1.1"/><circle cx="24.9" cy="16"   r="1.1"/>
+            <circle cx="22"   cy="18.9" r="1.1"/><circle cx="18"   cy="20"   r="1.1"/>
+            <circle cx="14"   cy="18.9" r="1.1"/><circle cx="11.1" cy="16"   r="1.1"/>
+            <circle cx="10"   cy="12"   r="1.1"/><circle cx="11.1" cy="8"    r="1.1"/>
+            <circle cx="14"   cy="5.1"  r="1.1"/><circle cx="18"   cy="4"    r="1.1"/>
+            <circle cx="22"   cy="5.1"  r="1.1"/><circle cx="24.9" cy="8"    r="1.1"/>
+          </g>
+        </svg>
+        <span class="eu-label">Financé par l'Union européenne</span>
+      </div>
+
+      
+      <p class="disclaimer">
+        Ce site a été réalisé avec le soutien financier de l'Union européenne. Son contenu
+        relève de la seule responsabilité de Live Y Dream et ne reflète pas nécessairement
+        les opinions de l'Union européenne.
+      </p>
+
+      <div class="footer-links">
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="politique-confidentialite.html">Politique de confidentialité</a>
+        <a href="https://www.eeas.europa.eu/togo" target="_blank" rel="noopener">Délégation de l'Union européenne au Togo</a>
+
+        <button type="button" id="gerer-preferences" class="link-button">Gérer mes préférences</button>
+      </div>
+
+    </div>
+  </footer>
+
+  <a class="sticky-cta btn btn-primary" href="#question" data-whatsapp="AET1">Poser ma question</a>
+
+  <div id="bandeau-consentement" class="consent" role="dialog" aria-label="Choix des traceurs" hidden>
+    <p>
+      Ce site utilise des outils de mesure pour comprendre l'audience de la campagne.
+      Rien n'est activé tant que vous n'avez pas choisi.
+    </p>
+    <div class="consent-actions">
+      <button type="button" class="btn btn-primary" id="consent-accepter">Accepter</button>
+      <button type="button" class="btn btn-outline" id="consent-refuser">Refuser</button>
+      <a href="politique-confidentialite.html" class="link-strong">En savoir plus</a>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

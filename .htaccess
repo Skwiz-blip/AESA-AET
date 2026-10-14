@@ -1,0 +1,2 @@
+# Page affichée quand une adresse n'existe pas (Hostinger lit ce fichier)
+ErrorDocument 404 /404.html

@@ -1,0 +1,435 @@
+
+:root {
+  --c-primaire:        #003399;   /* bleu UE provisoire */
+  --c-primaire-fonce:  #0B1F4D;
+  --c-accent:          #FFCC00;   /* jaune UE provisoire */
+  --c-texte:           #1a1a1a;
+  --c-texte-doux:      #4A5568;
+  --c-texte-sur-fonce: #DCE3F2;
+  --c-fond:            #ffffff;
+  --c-fond-alt:        #f4f6fa;
+  --c-ligne:           #D9DEE8;
+  --c-direct:          #C8261A;   /* pastille « En direct » */
+
+  --police: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --rayon: 0;   /* angles droits partout */
+  --espace: 16px;
+}
+
+
+/* ---------- 2. BASE ---------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--police);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--c-texte);
+  background: var(--c-fond);
+}
+
+h1, h2, h3 {
+  margin: 0;
+  line-height: 1.15;
+  color: var(--c-primaire-fonce);
+}
+
+img { max-width: 100%; height: auto; }
+
+a { color: var(--c-primaire); }
+
+/* L'attribut hidden doit toujours gagner, même sur un élément en flex ou en grid */
+[hidden] { display: none !important; }
+
+/* Contour de focus bien visible pour la navigation au clavier */
+:focus-visible {
+  outline: 3px solid var(--c-primaire);
+  outline-offset: 3px;
+}
+.hero :focus-visible,
+.ask :focus-visible,
+.site-footer :focus-visible {
+  outline-color: var(--c-accent);
+}
+
+/* Texte lu par les lecteurs d'écran mais invisible à l'écran */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Lien « Aller au contenu » : invisible tant qu'il n'a pas le focus */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--espace);
+  z-index: 30;
+  padding: 12px 18px;
+  font-weight: 700;
+  color: var(--c-fond);
+  background: var(--c-primaire);
+}
+.skip-link:focus { top: var(--espace); }
+
+
+/* ---------- 3. COMPOSANTS RÉUTILISABLES ---------- */
+
+/* Mise en page */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 calc(var(--espace) * 1.25);
+}
+.section { padding: calc(var(--espace) * 3.5) 0; }
+.bg-soft { background: var(--c-fond-alt); }
+
+.grid { display: grid; grid-template-columns: 1fr; gap: calc(var(--espace) * 2.5) calc(var(--espace) * 2); }
+.grid-joined { gap: 3px; }   /* tuiles collées : le fond de la section dessine les séparations */
+
+/* Titres et textes */
+.section-title { margin-bottom: 12px; font-size: 30px; }
+.section-intro { max-width: 640px; margin: 0 0 calc(var(--espace) * 2); }
+.note { margin: calc(var(--espace) * 1.5) 0 0; font-size: 15px; }
+.muted { color: var(--c-texte-doux); }
+
+/* Petit titre en capitales au-dessus d'un titre */
+.eyebrow {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-primaire);
+}
+
+/* Carte : un aplat de couleur, sans contour ni ombre */
+.card {
+  padding: calc(var(--espace) * 1.5);
+  background: var(--c-fond-alt);
+}
+.bg-soft .card { background: var(--c-fond); }
+
+/* Boutons : 44 px de haut minimum pour le doigt */
+.btn {
+  display: inline-block;
+  min-height: 44px;
+  padding: 12px 24px;
+  border: 2px solid transparent;
+  border-radius: var(--rayon);
+  font: 700 16px/1.2 var(--police);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn-primary             { color: var(--c-fond); background: var(--c-primaire); }
+.btn-primary:hover       { background: var(--c-primaire-fonce); }
+.btn-accent              { color: var(--c-primaire-fonce); background: var(--c-accent); }
+.btn-outline             { color: var(--c-primaire); background: var(--c-fond); border-color: var(--c-primaire); }
+.btn-outline-light       { color: var(--c-fond); border-color: var(--c-fond); }
+.btn-large               { padding: 16px 30px; font-size: 18px; }
+
+/* Liens mis en avant */
+.link-strong { font-weight: 700; }
+.link-list { margin: 0; padding: 0; list-style: none; }
+.link-list li + li { margin-top: 8px; }
+
+/* Bouton qui ressemble à un lien (pied de page) */
+.link-button {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: var(--c-fond);
+  text-decoration: underline;
+  background: none;
+  cursor: pointer;
+}
+
+/* Pastilles de statut et boutons de filtre */
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 0;
+  border-radius: var(--rayon);
+  font: 700 12px/1.4 var(--police);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--c-primaire-fonce);
+  background: var(--c-accent);
+}
+.tag-live   { color: var(--c-fond); background: var(--c-direct); }
+.tag-done   { background: var(--c-ligne); }
+.tag-filter { min-height: 44px; padding: 8px 14px; background: var(--c-ligne); cursor: pointer; }
+.tag-filter[aria-pressed="true"] { color: var(--c-fond); background: var(--c-primaire); }
+
+/* État vide des sections V2 : jamais de zone blanche */
+.empty {
+  margin: 0;
+  padding: calc(var(--espace) * 1.5);
+  color: var(--c-texte-doux);
+  background: var(--c-fond-alt);
+}
+.bg-soft .empty { background: var(--c-fond); }
+
+/* Élément pas encore disponible (plateforme de podcast, bouton Écouter) */
+.is-soon { color: var(--c-texte-doux); cursor: default; opacity: .75; }
+.soon-label { display: block; font-size: 12px; font-weight: 400; }
+
+/* Façade vidéo : vignette locale + bouton, lecteur YouTube chargé au clic.
+   Le ratio 16:9 est obtenu avec padding-top pour rester compatible avec les vieux navigateurs. */
+.yt {
+  position: relative;
+  padding-top: 56.25%;
+  overflow: hidden;
+  background: var(--c-primaire-fonce);
+  border-radius: var(--rayon);
+}
+.yt img,
+.yt iframe,
+.yt-play {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.yt img { object-fit: cover; }
+.yt-play { padding: 0; background: transparent; cursor: pointer; }
+
+/* Rond sombre et triangle de lecture, dessinés en CSS */
+.yt-play::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgba(11, 31, 77, .85);
+}
+.yt-play::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -12px 0 0 -7px;
+  border-style: solid;
+  border-width: 12px 0 12px 20px;
+  border-color: transparent transparent transparent var(--c-fond);
+}
+.yt-play:hover::before { background: var(--c-primaire); }
+
+
+/* ---------- 4. SECTIONS DE LA PAGE ---------- */
+
+/* En-tête */
+.site-header { background: var(--c-fond); border-bottom: 1px solid var(--c-ligne); }
+.header-inner { display: flex; align-items: center; justify-content: space-between; min-height: 72px; }
+.eu-block { display: flex; align-items: center; gap: 12px; }
+.eu-block img { display: block; width: 60px; height: 40px; }
+.eu-label { font-size: 15px; font-weight: 700; line-height: 1.2; color: var(--c-primaire-fonce); }
+
+/* Sur mobile, la navigation est remplacée par le bouton fixe en bas d'écran */
+.nav { display: none; }
+
+/* Accroche */
+.hero { padding: calc(var(--espace) * 4) 0; color: var(--c-fond); background: var(--c-primaire-fonce); }
+.hero .eyebrow { color: var(--c-accent); }
+.hero h1 { font-size: 44px; line-height: 1; text-transform: uppercase; color: var(--c-fond); }
+.hero-slogan { margin: 16px 0 24px; font-size: 22px; font-weight: 600; }
+.hero-text { max-width: 640px; margin: 0 0 12px; font-size: 18px; color: var(--c-texte-sur-fonce); }
+.hero-text-strong { margin-bottom: calc(var(--espace) * 2); font-weight: 600; color: var(--c-fond); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* Partenariat */
+.partnership { display: grid; gap: calc(var(--espace) * 1.5); }
+.partnership p { margin: 0 0 var(--espace); }
+
+/* Calendrier : tuiles blanches, grand numéro en tête ; l'émission en direct passe en bleu plein */
+.episode {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(var(--espace) * 1.5);
+  background: var(--c-fond);
+}
+.episode-head { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.episode-number {
+  margin: 0;
+  font-size: 56px;
+  font-weight: 800;
+  line-height: .9;
+  letter-spacing: -.03em;
+  color: var(--c-primaire);
+}
+.episode h3 { margin: calc(var(--espace) * 1.25) 0 10px; font-size: 20px; }
+.episode .meta { margin: 0 0 6px; font-size: 15px; }
+.episode .countdown { margin: 8px 0 0; font-weight: 700; color: var(--c-primaire); }
+.episode .summary { margin: 12px 0 0; font-size: 15px; }
+.episode .actions { margin-top: auto; padding-top: var(--espace); }
+
+.episode.is-live { color: var(--c-fond); background: var(--c-primaire); }
+.episode.is-live h3,
+.episode.is-live .episode-number { color: var(--c-fond); }
+.episode.is-live .muted { color: var(--c-texte-sur-fonce); }
+.episode.is-live .tag-live { color: var(--c-direct); background: var(--c-fond); }
+
+/* Thématiques et voix : pas de boîte, une courte barre de couleur au-dessus du bloc */
+.theme::before,
+.voice::before {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 4px;
+  margin-bottom: var(--espace);
+  background: var(--c-primaire);
+}
+.theme h3 { margin-bottom: 10px; font-size: 24px; }
+.theme .eyebrow { font-size: 12px; }
+.theme p.muted { margin: 0 0 var(--espace); }
+
+/* Replays et podcast */
+.platforms { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: calc(var(--espace) * 1.75); }
+.platform { padding: 10px 18px; font-size: 15px; font-weight: 600; text-decoration: none; }
+.replay h3 { margin: var(--espace) 0 4px; font-size: 20px; }
+.replay .meta { margin: 0 0 8px; font-size: 15px; }
+.replay .summary { margin: 0 0 var(--espace); font-size: 15px; }
+.replay .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.unavailable { margin: 0; padding: var(--espace); text-align: center; background: var(--c-fond-alt); border-radius: var(--rayon); }
+
+/* Capsules */
+.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: calc(var(--espace) * 1.5); }
+.capsule .eyebrow { margin: 12px 0 4px; font-size: 12px; }
+.capsule h3 { font-size: 18px; }
+#capsules-vide { margin-top: var(--espace); }
+
+/* Poser sa question */
+.ask { padding: calc(var(--espace) * 4) 0; text-align: center; color: var(--c-fond); background: var(--c-primaire); }
+.ask .container { max-width: 760px; }
+.ask .eyebrow { color: var(--c-accent); }
+.ask h2 { margin-bottom: 20px; font-size: 34px; color: var(--c-fond); }
+.ask p { margin: 0 0 12px; font-size: 18px; color: #EAF0FF; }
+.ask .ask-strong { font-weight: 600; color: var(--c-fond); }
+.ask .btn-large { margin-top: calc(var(--espace) * 1.5); }
+.ask .notice { max-width: 600px; margin: calc(var(--espace) * 1.5) auto 0; font-size: 14px; color: var(--c-texte-sur-fonce); }
+
+/* Voix de la campagne */
+.voice h3 { font-size: 22px; }
+.voice .role { margin: 4px 0 14px; font-size: 15px; font-weight: 600; }
+.voice p { font-size: 16px; }
+.voice .socials { margin: 0; font-size: 14px; }
+
+/* Pied de page (padding bas élargi sur mobile pour ne pas être caché par le bouton fixe) */
+.site-footer { padding: calc(var(--espace) * 3) 0 112px; font-size: 15px; color: var(--c-texte-sur-fonce); background: var(--c-primaire-fonce); }
+.site-footer .eu-block { margin-bottom: calc(var(--espace) * 1.5); }
+.site-footer .eu-label { color: var(--c-fond); }
+.disclaimer { max-width: 760px; margin: 0 0 calc(var(--espace) * 1.75); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 12px 28px; padding-top: 20px; border-top: 1px solid #2A3C6B; }
+.footer-links a { color: var(--c-fond); }
+
+/* Bouton fixe en bas d'écran, mobile uniquement */
+.sticky-cta {
+  position: fixed;
+  left: var(--espace);
+  right: var(--espace);
+  bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  z-index: 10;
+  box-shadow: 0 6px 20px rgba(11, 31, 77, .3);
+}
+
+
+/* ---------- 5. PAGES LÉGALES ET 404 ---------- */
+.legal { max-width: 760px; }
+.legal h1 { margin-bottom: 8px; font-size: 32px; }
+.legal h2 { margin: calc(var(--espace) * 2.5) 0 12px; font-size: 22px; }
+.legal h3 { margin: calc(var(--espace) * 1.5) 0 8px; font-size: 18px; }
+.legal p, .legal li { margin: 0 0 12px; }
+.legal .updated { margin-bottom: calc(var(--espace) * 2); }
+.legal address { margin: 0 0 12px; font-style: normal; }
+
+/* Les tableaux tiennent dans la largeur ; s'ils débordent malgré tout, ils défilent dans leur cadre */
+.table-scroll { overflow-x: auto; margin: 0 0 var(--espace); }
+.legal table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.legal th, .legal td { padding: 8px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--c-ligne); }
+.legal th { background: var(--c-fond-alt); }
+
+.back-link { font-size: 15px; font-weight: 700; }
+
+.not-found { padding: calc(var(--espace) * 6) 0; text-align: center; }
+.not-found h1 { margin-bottom: var(--espace); font-size: 30px; }
+
+
+/* ---------- 6. BANDEAU DE CONSENTEMENT ---------- */
+.consent {
+  position: fixed;
+  left: var(--espace);
+  right: var(--espace);
+  bottom: calc(76px + env(safe-area-inset-bottom, 0px));   /* au-dessus du bouton fixe */
+  z-index: 20;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  background: var(--c-fond);
+  box-shadow: 0 8px 32px rgba(11, 31, 77, .25);   /* détache le bandeau du contenu, sans contour */
+}
+.consent p { margin: 0 0 14px; font-size: 15px; }
+.consent-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+/* Accepter et Refuser : exactement le même poids visuel */
+/* Accepter et Refuser : exactement le même poids visuel */
+.btn-consent { min-width: 120px; color: var(--c-fond); background: var(--c-primaire); }
+.btn-consent:hover { background: var(--c-primaire-fonce); }
+
+
+/* ---------- 7. ÉCRANS LARGES ---------- */
+
+/* Sur un appareil avec souris, « Bientôt disponible » n'apparaît qu'au survol */
+@media (hover: hover) {
+  .soon-label { display: none; }
+}
+
+@media (min-width: 600px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 900px) {
+  .container { padding: 0 calc(var(--espace) * 2); }
+  .section { padding: calc(var(--espace) * 5.5) 0; }
+  .section-title { font-size: 40px; }
+
+  .header-inner { min-height: 84px; }
+  .nav { display: flex; align-items: center; gap: calc(var(--espace) * 2); }
+  .nav a { font-size: 15px; font-weight: 600; color: var(--c-texte); text-decoration: none; }
+  .nav a:hover { color: var(--c-primaire); }
+  .nav a.btn { padding: 10px 20px; color: var(--c-fond); }
+
+  .hero { padding: calc(var(--espace) * 7) 0 calc(var(--espace) * 6.5); }
+  .hero h1 { font-size: 80px; }
+  .hero-slogan { font-size: 30px; }
+  .hero-text { font-size: 19px; }
+
+  .partnership { grid-template-columns: 1fr 1.3fr; gap: calc(var(--espace) * 4); }
+
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .ask { padding: calc(var(--espace) * 6) 0; }
+  .ask h2 { font-size: 52px; }
+
+  .legal h1 { font-size: 40px; }
+  .legal table { font-size: 15px; }
+  .legal th, .legal td { padding: 10px 12px; }
+
+  .sticky-cta { display: none; }
+  .site-footer { padding-bottom: calc(var(--espace) * 2.5); }
+  .consent { bottom: var(--espace); }
+}

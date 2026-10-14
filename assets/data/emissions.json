@@ -1,0 +1,83 @@
+{
+  "emissions": [
+    {
+      "id": "AET1",
+      "numero": 1,
+      "theme": "entrepreneuriat",
+      "ville": "",
+      "radio": "",
+      "frequence": "",
+      "date": "",
+      "heure": "",
+      "statut": "a_venir",
+      "resume": "",
+      "replay_youtube_id": "",
+      "replay_duree": "",
+      "podcast_url": "",
+      "capsules": []
+    },
+    {
+      "id": "AET2",
+      "numero": 2,
+      "theme": "energie",
+      "ville": "",
+      "radio": "",
+      "frequence": "",
+      "date": "",
+      "heure": "",
+      "statut": "a_venir",
+      "resume": "",
+      "replay_youtube_id": "",
+      "replay_duree": "",
+      "podcast_url": "",
+      "capsules": []
+    },
+    {
+      "id": "AET3",
+      "numero": 3,
+      "theme": "environnement",
+      "ville": "",
+      "radio": "",
+      "frequence": "",
+      "date": "",
+      "heure": "",
+      "statut": "a_venir",
+      "resume": "",
+      "replay_youtube_id": "",
+      "replay_duree": "",
+      "podcast_url": "",
+      "capsules": []
+    },
+    {
+      "id": "AET4",
+      "numero": 4,
+      "theme": "culture",
+      "ville": "",
+      "radio": "",
+      "frequence": "",
+      "date": "",
+      "heure": "",
+      "statut": "a_venir",
+      "resume": "",
+      "replay_youtube_id": "",
+      "replay_duree": "",
+      "podcast_url": "",
+      "capsules": []
+    }
+  ],
+
+  "videos_campagne": [
+    { "youtube_id": "af74Yb1eGBQ", "titre": "Le film de la campagne Agir Ensemble", "theme": "" },
+    { "youtube_id": "ZsyuQevV5nE", "titre": "Agir ensemble pour connecter", "theme": "energie" },
+    { "youtube_id": "q_OdWPV7tIc", "titre": "Agir ensemble pour innover", "theme": "entrepreneuriat" },
+    { "youtube_id": "0ZgrEMNi0cY", "titre": "Agir ensemble pour protéger", "theme": "environnement" }
+  ],
+
+  "plateformes_podcast": [
+    { "nom": "Spotify", "url": "" },
+    { "nom": "Apple Podcasts", "url": "" },
+    { "nom": "Deezer", "url": "" },
+    { "nom": "YouTube", "url": "" },
+    { "nom": "Écouter sur le site", "url": "" }
+  ]
+}
