@@ -70,4 +70,3 @@ Puis ouvrir http://localhost:8000.
 - Image de partage, favicon, réseaux de la Délégation : emplacements commentés dans `index.html`.
 - Date de mise en ligne dans les deux pages légales.
 
-
