@@ -49,7 +49,7 @@ a { color: var(--c-primaire); }
   outline: 3px solid var(--c-primaire);
   outline-offset: 3px;
 }
-.hero :focus-visible,
+.hero-videos :focus-visible,
 .ask :focus-visible,
 .site-footer :focus-visible {
   outline-color: var(--c-accent);
@@ -132,7 +132,6 @@ a { color: var(--c-primaire); }
 .btn-primary:hover       { background: var(--c-primaire-fonce); }
 .btn-accent              { color: var(--c-primaire-fonce); background: var(--c-accent); }
 .btn-outline             { color: var(--c-primaire); background: var(--c-fond); border-color: var(--c-primaire); }
-.btn-outline-light       { color: var(--c-fond); border-color: var(--c-fond); }
 .btn-large               { padding: 16px 30px; font-size: 18px; }
 
 /* Liens mis en avant */
@@ -151,7 +150,7 @@ a { color: var(--c-primaire); }
   cursor: pointer;
 }
 
-/* Pastilles de statut et boutons de filtre */
+/* Pastilles de statut */
 .tag {
   display: inline-block;
   padding: 3px 8px;
@@ -165,8 +164,6 @@ a { color: var(--c-primaire); }
 }
 .tag-live   { color: var(--c-fond); background: var(--c-direct); }
 .tag-done   { background: var(--c-ligne); }
-.tag-filter { min-height: 44px; padding: 8px 14px; background: var(--c-ligne); cursor: pointer; }
-.tag-filter[aria-pressed="true"] { color: var(--c-fond); background: var(--c-primaire); }
 
 /* État vide des sections V2 : jamais de zone blanche */
 .empty {
@@ -239,14 +236,12 @@ a { color: var(--c-primaire); }
 /* Sur mobile, la navigation est remplacée par le bouton fixe en bas d'écran */
 .nav { display: none; }
 
-/* Accroche */
-.hero { padding: calc(var(--espace) * 4) 0; color: var(--c-fond); background: var(--c-primaire-fonce); }
-.hero .eyebrow { color: var(--c-accent); }
-.hero h1 { font-size: 44px; line-height: 1; text-transform: uppercase; color: var(--c-fond); }
-.hero-slogan { margin: 16px 0 24px; font-size: 22px; font-weight: 600; }
-.hero-text { max-width: 640px; margin: 0 0 12px; font-size: 18px; color: var(--c-texte-sur-fonce); }
-.hero-text-strong { margin-bottom: calc(var(--espace) * 2); font-weight: 600; color: var(--c-fond); }
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+/* Accroche : un bandeau bleu avec la vidéo au centre, puis le texte sur fond blanc */
+.hero-videos { padding: calc(var(--espace) * 2) calc(var(--espace) * 1.25); background: var(--c-primaire-fonce); }
+.hero-content { padding-top: calc(var(--espace) * 2.5); }
+.hero h1 { font-size: 44px; line-height: 1; text-transform: uppercase; }
+.hero-text { max-width: 640px; margin: 0 0 12px; font-size: 18px; color: var(--c-texte-doux); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: calc(var(--espace) * 1.5); }
 
 /* Partenariat */
 .partnership { display: grid; gap: calc(var(--espace) * 1.5); }
@@ -304,11 +299,49 @@ a { color: var(--c-primaire); }
 .replay .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .unavailable { margin: 0; padding: var(--espace); text-align: center; background: var(--c-fond-alt); border-radius: var(--rayon); }
 
-/* Capsules */
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: calc(var(--espace) * 1.5); }
-.capsule .eyebrow { margin: 12px 0 4px; font-size: 12px; }
-.capsule h3 { font-size: 18px; }
-#capsules-vide { margin-top: var(--espace); }
+/* Capsules : carrousel automatique en haut de l'accroche.
+   Une seule vidéo visible à la fois ; le carrousel passe à la suivante, une par une */
+.carousel {
+  display: flex;
+  gap: var(--espace);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Centrée ; sur grand écran, elle ne dépasse pas 60 % de la hauteur de l'écran */
+  max-width: calc(60vh * 16 / 9);
+  margin: 0 auto;
+}
+.carousel::-webkit-scrollbar { display: none; }
+.carousel > .capsule { flex: 0 0 100%; scroll-snap-align: start; }
+.hero-videos .empty { color: var(--c-texte-sur-fonce); background: rgba(255, 255, 255, .08); }
+
+/* Points sous la vidéo : un par vidéo, celui de la vidéo affichée est jaune.
+   Le bouton fait 24 px pour le doigt, le point visible 10 px. */
+.carousel-dots { display: flex; justify-content: center; gap: 4px; margin-top: 12px; }
+.carousel-dots button { width: 24px; height: 24px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.carousel-dots button::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  margin: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .4);
+}
+.carousel-dots button[aria-current="true"]::before { background: var(--c-accent); }
+
+/* « Agir Ensemble » sous les points, dans le bandeau bleu */
+.hero-tagline {
+  margin: 12px 0 0;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: .02em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--c-fond);
+}
 
 /* Poser sa question */
 .ask { padding: calc(var(--espace) * 4) 0; text-align: center; color: var(--c-fond); background: var(--c-primaire); }
@@ -412,7 +445,9 @@ a { color: var(--c-primaire); }
   .nav a:hover { color: var(--c-primaire); }
   .nav a.btn { padding: 10px 20px; color: var(--c-fond); }
 
-  .hero { padding: calc(var(--espace) * 7) 0 calc(var(--espace) * 6.5); }
+  .hero-videos { padding: calc(var(--espace) * 3) calc(var(--espace) * 2); }
+  .hero-tagline { font-size: 40px; }
+  .hero-content { padding-top: calc(var(--espace) * 4); }
   .hero h1 { font-size: 80px; }
   .hero-slogan { font-size: 30px; }
   .hero-text { font-size: 19px; }

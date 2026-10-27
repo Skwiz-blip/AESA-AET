@@ -79,25 +79,33 @@
   <main id="contenu">
  
     <section id="haut" class="hero">
-      <div class="container">
+
+      <!-- Carrousel des capsules : vidéos lues dans assets/data/emissions.json.
+           Il défile tout seul ; chaque vignette lance sa vidéo au clic -->
+      <div id="capsules" class="hero-videos">
+        <div id="liste-capsules" class="carousel" role="region" aria-label="Vidéos de la campagne" tabindex="0"></div>
+        <p id="capsules-vide" class="empty">Les capsules apparaîtront ici après les premières émissions.</p>
+
+        <!-- Un point par vidéo, ajouté par app.js : montre qu'on peut faire glisser -->
+        <div id="points-capsules" class="carousel-dots" role="group" aria-label="Choisir une vidéo"></div>
+
+        <p class="hero-tagline">Agir Ensemble Tour</p>
+      </div>
+
+      <!-- Accroche, sur fond blanc sous le bandeau vidéo -->
+      <div class="container hero-content">
         <p class="eyebrow">Émissions radio itinérantes · Togo</p>
         <h1>Agir Ensemble Tour</h1>
-        <p class="hero-slogan">La parole circule. Le Tour aussi.</p>
-
         <p class="hero-text">
           Quatre émissions de radio itinérantes, à Lomé et dans les villes de l'intérieur,
           pour parler de ce qui change vraiment : l'énergie, l'environnement,
           l'entrepreneuriat et la culture.
         </p>
-        <p class="hero-text hero-text-strong">
-          Vous écoutez, vous réagissez, vous posez vos questions.
-          Et vos questions passent à l'antenne.
-        </p>
 
         <div class="hero-actions">
-          <a class="btn btn-accent" data-whatsapp-placement="hero"
+          <a class="btn btn-primary" data-whatsapp-placement="hero"
              href="https://wa.me/22870087777?text=AET1%20Bonjour%2C%20ma%20question%20pour%20l%27%C3%A9mission%20%3A">Je poste ma question</a>
-          <a class="btn btn-outline-light" href="#calendrier">Voir le calendrier</a>
+          <a class="btn btn-outline" href="#calendrier">Voir le calendrier</a>
         </div>
       </div>
     </section>
@@ -217,25 +225,6 @@
         <p id="replays-vide" class="empty">Les replays arriveront après la première émission.</p>
       </div>
     </section>
-    <section id="capsules" class="section">
-      <div class="container">
-        <p class="eyebrow">Capsules</p>
-        <h2 class="section-title">Les moments forts</h2>
-        <p class="section-intro muted">Des extraits courts, à regarder en une minute et à partager.</p>
-
-        <div class="filters" role="group" aria-label="Filtrer les capsules par thème">
-          <button type="button" class="tag tag-filter" data-filtre="tous" aria-pressed="true">Tous</button>
-          <button type="button" class="tag tag-filter" data-filtre="energie" aria-pressed="false">Énergie</button>
-          <button type="button" class="tag tag-filter" data-filtre="environnement" aria-pressed="false">Environnement</button>
-          <button type="button" class="tag tag-filter" data-filtre="entrepreneuriat" aria-pressed="false">Entrepreneuriat</button>
-          <button type="button" class="tag tag-filter" data-filtre="culture" aria-pressed="false">Culture</button>
-        </div>
-
-        <div id="liste-capsules" class="grid grid-3"></div>
-        <p id="capsules-vide" class="empty">Les capsules apparaîtront ici après les premières émissions.</p>
-      </div>
-    </section>
-
     <section id="question" class="ask">
       <div class="container">
         <p class="eyebrow">Poser sa question</p>

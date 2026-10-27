@@ -14,7 +14,7 @@
      5. Calendrier des émissions
      6. Vidéos YouTube en façade
      7. Replays et podcast
-     8. Capsules et filtre par thème
+     8. Capsules : carrousel automatique
      9. Consentement
     10. Démarrage
    ========================================================= */
@@ -30,6 +30,9 @@ var EMISSION_PAR_DEFAUT = "AET1";
 
 // Calendrier, replays, capsules et plateformes de podcast : tout se met à jour dans ce fichier
 var URL_DONNEES = "assets/data/emissions.json";
+
+// Temps d'affichage de chaque vidéo dans le carrousel du haut de page
+var DELAI_CARROUSEL = 5000;   // 5 secondes
 
 // Mémorisation du choix de consentement (même clé et même durée que dans le <head> des pages)
 var CLE_CONSENTEMENT = "aet-consentement";
@@ -324,25 +327,45 @@ function afficherCalendrier(emissions) {
 /* ---------- 6. VIDÉOS YOUTUBE EN FAÇADE ----------
    Au premier affichage : une vignette locale (assets/img/thumb-<id>.webp)
    et un bouton. Le lecteur YouTube, sur le domaine sans cookie,
-   n'est inséré qu'au clic. auLancement sert à mesurer la lecture. */
+   n'est inséré qu'au clic. auLancement sert à mesurer la lecture.
+   Une seule vidéo joue à la fois : en lancer une remet la précédente en vignette. */
+
+// Vidéo en cours de lecture : { facade: élément .yt, remettreVignette: fonction }, ou null
+var videoEnCours = null;
+
+function arreterVideoEnCours() {
+  if (!videoEnCours) return;
+  videoEnCours.remettreVignette();
+  videoEnCours = null;
+}
 
 function creerFacadeVideo(youtubeId, titre, auLancement) {
   var facade = creer("div", "yt");
 
-  var vignette = creer("img");
-  vignette.setAttribute("loading", "lazy");
-  vignette.width = 480;
-  vignette.height = 270;
-  vignette.alt = titre;
-  // Vignette absente du dossier : on garde le fond uni plutôt qu'une image cassée
-  vignette.onerror = function () { vignette.style.visibility = "hidden"; };
-  vignette.src = "assets/img/thumb-" + youtubeId + ".webp";
+  function afficherVignette() {
+    var vignette = creer("img");
+    vignette.setAttribute("loading", "lazy");
+    vignette.width = 480;
+    vignette.height = 270;
+    vignette.alt = titre;
+    // Vignette absente du dossier : on garde le fond uni plutôt qu'une image cassée
+    vignette.onerror = function () { vignette.style.visibility = "hidden"; };
+    vignette.src = "assets/img/thumb-" + youtubeId + ".webp";
 
-  var bouton = creer("button", "yt-play");
-  bouton.type = "button";
-  bouton.setAttribute("aria-label", "Lire la vidéo : " + titre);
+    var bouton = creer("button", "yt-play");
+    bouton.type = "button";
+    bouton.setAttribute("aria-label", "Lire la vidéo : " + titre);
+    bouton.addEventListener("click", lancerLecture);
 
-  bouton.addEventListener("click", function () {
+    facade.innerHTML = "";
+    facade.appendChild(vignette);
+    facade.appendChild(bouton);
+  }
+
+  function lancerLecture() {
+    arreterVideoEnCours();
+    videoEnCours = { facade: facade, remettreVignette: afficherVignette };
+
     var lecteur = document.createElement("iframe");
     lecteur.src = "https://www.youtube-nocookie.com/embed/" + youtubeId + "?autoplay=1";
     lecteur.title = titre;
@@ -353,10 +376,9 @@ function creerFacadeVideo(youtubeId, titre, auLancement) {
     facade.appendChild(lecteur);
     lecteur.focus();
     auLancement();
-  });
+  }
 
-  facade.appendChild(vignette);
-  facade.appendChild(bouton);
+  afficherVignette();
   return facade;
 }
 
@@ -455,7 +477,12 @@ function afficherReplays(emissions) {
 }
 
 
-/* ---------- 8. CAPSULES ET FILTRE PAR THÈME ---------- */
+/* ---------- 8. CAPSULES : CARROUSEL AUTOMATIQUE ----------
+   Les capsules défilent toutes seules en haut de page, puis reviennent
+   à la première. Le défilement fait une pause pendant qu'une vidéo joue,
+   quand la souris survole le carrousel ou quand il a le focus du clavier.
+   Il s'arrête pour de bon dès que le visiteur touche le carrousel du doigt,
+   et ne démarre pas si le visiteur a demandé à réduire les animations. */
 
 // Rassemble les capsules des émissions (les plus récentes d'abord) puis les vidéos de la campagne
 function listerCapsules(donnees) {
@@ -495,50 +522,144 @@ function creerCarteCapsule(capsule) {
       emission: capsule.emission
     });
   }));
-  carte.appendChild(creer("p", "eyebrow", nomTheme(capsule.theme, "court") || "Agir Ensemble"));
-  carte.appendChild(creer("h3", "", capsule.titre));
   return carte;
 }
 
 function afficherCapsules(capsules) {
-  var conteneur = document.getElementById("liste-capsules");
+  var carrousel = document.getElementById("liste-capsules");
   capsules.forEach(function (capsule) {
-    conteneur.appendChild(creerCarteCapsule(capsule));
+    carrousel.appendChild(creerCarteCapsule(capsule));
   });
-  filtrerCapsules("tous");
+  document.getElementById("capsules-vide").hidden = capsules.length > 0;
+  creerPoints(capsules.length);
+  lancerDefilementAuto();
 }
 
-// Affiche les capsules d'un thème ("tous" pour tout voir) et met à jour les boutons de filtre
-function filtrerCapsules(theme) {
-  pourChaque("[data-filtre]", function (bouton) {
-    var actif = bouton.getAttribute("data-filtre") === theme;
-    bouton.setAttribute("aria-pressed", actif ? "true" : "false");
-  });
-
-  var nombreVisibles = 0;
-  pourChaque("#liste-capsules .capsule", function (carte) {
-    var visible = theme === "tous" || carte.getAttribute("data-theme") === theme;
-    carte.hidden = !visible;
-    if (visible) nombreVisibles++;
-  });
-
-  document.getElementById("capsules-vide").hidden = nombreVisibles > 0;
+// Un point par vidéo sous le carrousel ; un clic sur un point affiche sa vidéo
+function creerPoints(nombre) {
+  if (nombre < 2) return;
+  var conteneur = document.getElementById("points-capsules");
+  for (var index = 0; index < nombre; index++) {
+    conteneur.appendChild(creerPoint(index));
+  }
+  mettreAJourPoints();
 }
 
-// Boutons de filtre et liens « Voir les vidéos » des thématiques
-function brancherFiltres() {
-  pourChaque("[data-filtre]", function (bouton) {
-    bouton.addEventListener("click", function () {
-      var theme = bouton.getAttribute("data-filtre");
-      filtrerCapsules(theme);
-      mesurer("select_theme", { theme: theme });
-    });
+function creerPoint(index) {
+  var point = creer("button");
+  point.type = "button";
+  point.setAttribute("aria-label", "Vidéo " + (index + 1));
+  point.addEventListener("click", function () {
+    arreterDefilementAuto();
+    allerALaVideo(index);
   });
+  return point;
+}
 
+// Allume le point de la vidéo affichée
+function mettreAJourPoints() {
+  var carrousel = document.getElementById("liste-capsules");
+  var pas = largeurDUnPas(carrousel);
+  if (!pas) return;
+
+  var indexAffiche = Math.round(carrousel.scrollLeft / pas);
+  pourChaque("#points-capsules button", function (point, index) {
+    if (index === indexAffiche) point.setAttribute("aria-current", "true");
+    else point.removeAttribute("aria-current");
+  });
+}
+
+var minuterieCarrousel = null;
+var sourisSurCarrousel = false;
+
+// Largeur d'un pas du carrousel : de la première vidéo à la deuxième, écart compris (0 s'il n'y en a qu'une)
+function largeurDUnPas(carrousel) {
+  var capsules = carrousel.querySelectorAll(".capsule");
+  return capsules.length < 2 ? 0 : capsules[1].offsetLeft - capsules[0].offsetLeft;
+}
+
+function allerALaVideo(index) {
+  var carrousel = document.getElementById("liste-capsules");
+  carrousel.scrollLeft = index * largeurDUnPas(carrousel);
+}
+
+// Avance d'une vidéo ; après la dernière, revient à la première
+function avancerCarrousel() {
+  var carrousel = document.getElementById("liste-capsules");
+  var pas = largeurDUnPas(carrousel);
+  if (!pas) return;
+
+  var finAtteinte = carrousel.scrollLeft >= carrousel.scrollWidth - carrousel.clientWidth - 1;
+  carrousel.scrollLeft = finAtteinte ? 0 : carrousel.scrollLeft + pas;
+}
+
+// Vrai quand le visiteur regarde ou manipule le carrousel : on ne le fait pas bouger
+function carrouselEnPause() {
+  var carrousel = document.getElementById("liste-capsules");
+  return videoEnCours !== null
+    || sourisSurCarrousel
+    || carrousel.contains(document.activeElement)
+    || document.hidden;
+}
+
+function lancerDefilementAuto() {
+  var mouvementReduit = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (mouvementReduit || minuterieCarrousel) return;
+
+  minuterieCarrousel = setInterval(function () {
+    if (!carrouselEnPause()) avancerCarrousel();
+  }, DELAI_CARROUSEL);
+}
+
+function arreterDefilementAuto() {
+  clearInterval(minuterieCarrousel);
+  minuterieCarrousel = null;
+}
+
+// Une vidéo du carrousel qui sort à moitié de l'écran s'arrête
+function arreterVideoHorsChamp() {
+  var carrousel = document.getElementById("liste-capsules");
+  if (!videoEnCours || !carrousel.contains(videoEnCours.facade)) return;
+
+  var zone = carrousel.getBoundingClientRect();
+  var video = videoEnCours.facade.getBoundingClientRect();
+  var largeurVisible = Math.min(video.right, zone.right) - Math.max(video.left, zone.left);
+  if (largeurVisible < video.width / 2) arreterVideoEnCours();
+}
+
+function brancherCarrousel() {
+  var carrousel = document.getElementById("liste-capsules");
+  if (!carrousel) return;
+
+  carrousel.addEventListener("scroll", function () {
+    mettreAJourPoints();
+    arreterVideoHorsChamp();
+  });
+  window.addEventListener("resize", mettreAJourPoints);
+  carrousel.addEventListener("mouseenter", function () { sourisSurCarrousel = true; });
+  carrousel.addEventListener("mouseleave", function () { sourisSurCarrousel = false; });
+  // Le visiteur fait glisser le carrousel lui-même : il garde la main
+  carrousel.addEventListener("touchstart", arreterDefilementAuto);
+}
+
+// Place le carrousel sur la première vidéo d'un thème, s'il y en a une
+function montrerTheme(theme) {
+  var capsules = document.querySelectorAll("#liste-capsules .capsule");
+  for (var index = 0; index < capsules.length; index++) {
+    if (capsules[index].getAttribute("data-theme") === theme) {
+      arreterDefilementAuto();
+      allerALaVideo(index);
+      return;
+    }
+  }
+}
+
+// Liens « Voir les vidéos » des thématiques
+function brancherLiensThemes() {
   pourChaque("[data-voir-theme]", function (lien) {
     lien.addEventListener("click", function () {
       var theme = lien.getAttribute("data-voir-theme");
-      filtrerCapsules(theme);
+      montrerTheme(theme);
       mesurer("select_theme", { theme: theme });
     });
   });
@@ -628,7 +749,8 @@ pourChaque("[data-whatsapp-placement]", function (lien) {
 });
 pourChaque('a[href^="http"]:not([data-whatsapp-placement])', suivreLienSortant);
 
-brancherFiltres();
+brancherCarrousel();
+brancherLiensThemes();
 brancherConsentement();
 suivreDefilement();
 

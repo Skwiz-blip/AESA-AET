@@ -11,7 +11,7 @@ mentions-legales.html
 confidentialite.html
 404.html                   page introuvable (activée par .htaccess)
 assets/css/style.css       couleurs, police et arrondis réglés en haut du fichier (variables --c-*)
-assets/js/app.js           WhatsApp, calendrier, vidéos, filtre, consentement, mesure
+assets/js/app.js           WhatsApp, calendrier, carrousel vidéo, consentement, mesure
 assets/data/emissions.json calendrier, replays, capsules, liens podcast
 assets/img/                images WebP (emblème provisoire, vignettes YouTube)
 reference/                 brief, contenu et première maquette (non publiés)
