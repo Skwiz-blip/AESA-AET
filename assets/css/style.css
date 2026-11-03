@@ -1,23 +1,22 @@
 
 :root {
-  --c-primaire:        #003399;   /* bleu UE provisoire */
+  --c-primaire:        #003399;  
   --c-primaire-fonce:  #0B1F4D;
-  --c-accent:          #FFCC00;   /* jaune UE provisoire */
+  --c-accent:          #FFCC00;  
   --c-texte:           #1a1a1a;
   --c-texte-doux:      #4A5568;
   --c-texte-sur-fonce: #DCE3F2;
   --c-fond:            #ffffff;
   --c-fond-alt:        #f4f6fa;
   --c-ligne:           #D9DEE8;
-  --c-direct:          #C8261A;   /* pastille « En direct » */
+  --c-direct:          #C8261A;  
 
   --police: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --rayon: 0;   /* angles droits partout */
+  --rayon: 0;   
   --espace: 16px;
 }
 
 
-/* ---------- 2. BASE ---------- */
 * { box-sizing: border-box; }
 
 html { scroll-behavior: smooth; }
@@ -41,10 +40,8 @@ img { max-width: 100%; height: auto; }
 
 a { color: var(--c-primaire); }
 
-/* L'attribut hidden doit toujours gagner, même sur un élément en flex ou en grid */
 [hidden] { display: none !important; }
 
-/* Contour de focus bien visible pour la navigation au clavier */
 :focus-visible {
   outline: 3px solid var(--c-primaire);
   outline-offset: 3px;
