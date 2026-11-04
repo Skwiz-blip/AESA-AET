@@ -125,11 +125,6 @@ function conserverParametresDansLiensInternes() {
 }
 
 
-/* ---------- 3. MESURE ----------
-   On pousse toujours les événements dans le dataLayer :
-   c'est Google Tag Manager qui décide, selon le consentement,
-   quelles balises (GA4, pixel Meta, Google Ads) se déclenchent. */
-
 window.dataLayer = window.dataLayer || [];
 
 // Tous les paramètres possibles des événements. GTM garde en mémoire la dernière valeur
