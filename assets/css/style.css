@@ -296,8 +296,8 @@ a { color: var(--c-primaire); }
 .replay .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .unavailable { margin: 0; padding: var(--espace); text-align: center; background: var(--c-fond-alt); border-radius: var(--rayon); }
 
-/* Capsules : carrousel automatique en haut de l'accroche.
-   Une seule vidéo visible à la fois ; le carrousel passe à la suivante, une par une */
+/* Capsules : carrousel en haut de l'accroche, qu'on fait défiler à la main.
+   Une seule vidéo visible à la fois */
 .carousel {
   display: flex;
   gap: var(--espace);

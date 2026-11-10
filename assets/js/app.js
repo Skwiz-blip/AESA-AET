@@ -14,7 +14,7 @@
      5. Calendrier des émissions
      6. Vidéos YouTube en façade
      7. Replays et podcast
-     8. Capsules : carrousel automatique
+     8. Capsules : carrousel
      9. Consentement
     10. Démarrage
    ========================================================= */
@@ -30,9 +30,6 @@ var EMISSION_PAR_DEFAUT = "AET1";
 
 // Calendrier, replays, capsules et plateformes de podcast : tout se met à jour dans ce fichier
 var URL_DONNEES = "assets/data/emissions.json";
-
-// Temps d'affichage de chaque vidéo dans le carrousel du haut de page
-var DELAI_CARROUSEL = 5000;   // 5 secondes
 
 // Mémorisation du choix de consentement (même clé et même durée que dans le <head> des pages)
 var CLE_CONSENTEMENT = "aet-consentement";
@@ -472,12 +469,10 @@ function afficherReplays(emissions) {
 }
 
 
-/* ---------- 8. CAPSULES : CARROUSEL AUTOMATIQUE ----------
-   Les capsules défilent toutes seules en haut de page, puis reviennent
-   à la première. Le défilement fait une pause pendant qu'une vidéo joue,
-   quand la souris survole le carrousel ou quand il a le focus du clavier.
-   Il s'arrête pour de bon dès que le visiteur touche le carrousel du doigt,
-   et ne démarre pas si le visiteur a demandé à réduire les animations. */
+/* ---------- 8. CAPSULES : CARROUSEL ----------
+   Les capsules s'affichent une par une en haut de page. Le carrousel ne
+   bouge jamais tout seul : le visiteur le fait glisser du doigt ou
+   clique sur un point pour changer de vidéo. */
 
 // Rassemble les capsules des émissions (les plus récentes d'abord) puis les vidéos de la campagne
 function listerCapsules(donnees) {
@@ -527,7 +522,6 @@ function afficherCapsules(capsules) {
   });
   document.getElementById("capsules-vide").hidden = capsules.length > 0;
   creerPoints(capsules.length);
-  lancerDefilementAuto();
 }
 
 // Un point par vidéo sous le carrousel ; un clic sur un point affiche sa vidéo
@@ -545,7 +539,6 @@ function creerPoint(index) {
   point.type = "button";
   point.setAttribute("aria-label", "Vidéo " + (index + 1));
   point.addEventListener("click", function () {
-    arreterDefilementAuto();
     allerALaVideo(index);
   });
   return point;
@@ -564,9 +557,6 @@ function mettreAJourPoints() {
   });
 }
 
-var minuterieCarrousel = null;
-var sourisSurCarrousel = false;
-
 // Largeur d'un pas du carrousel : de la première vidéo à la deuxième, écart compris (0 s'il n'y en a qu'une)
 function largeurDUnPas(carrousel) {
   var capsules = carrousel.querySelectorAll(".capsule");
@@ -576,39 +566,6 @@ function largeurDUnPas(carrousel) {
 function allerALaVideo(index) {
   var carrousel = document.getElementById("liste-capsules");
   carrousel.scrollLeft = index * largeurDUnPas(carrousel);
-}
-
-// Avance d'une vidéo ; après la dernière, revient à la première
-function avancerCarrousel() {
-  var carrousel = document.getElementById("liste-capsules");
-  var pas = largeurDUnPas(carrousel);
-  if (!pas) return;
-
-  var finAtteinte = carrousel.scrollLeft >= carrousel.scrollWidth - carrousel.clientWidth - 1;
-  carrousel.scrollLeft = finAtteinte ? 0 : carrousel.scrollLeft + pas;
-}
-
-// Vrai quand le visiteur regarde ou manipule le carrousel : on ne le fait pas bouger
-function carrouselEnPause() {
-  var carrousel = document.getElementById("liste-capsules");
-  return videoEnCours !== null
-    || sourisSurCarrousel
-    || carrousel.contains(document.activeElement)
-    || document.hidden;
-}
-
-function lancerDefilementAuto() {
-  var mouvementReduit = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (mouvementReduit || minuterieCarrousel) return;
-
-  minuterieCarrousel = setInterval(function () {
-    if (!carrouselEnPause()) avancerCarrousel();
-  }, DELAI_CARROUSEL);
-}
-
-function arreterDefilementAuto() {
-  clearInterval(minuterieCarrousel);
-  minuterieCarrousel = null;
 }
 
 // Une vidéo du carrousel qui sort à moitié de l'écran s'arrête
@@ -631,10 +588,6 @@ function brancherCarrousel() {
     arreterVideoHorsChamp();
   });
   window.addEventListener("resize", mettreAJourPoints);
-  carrousel.addEventListener("mouseenter", function () { sourisSurCarrousel = true; });
-  carrousel.addEventListener("mouseleave", function () { sourisSurCarrousel = false; });
-  // Le visiteur fait glisser le carrousel lui-même : il garde la main
-  carrousel.addEventListener("touchstart", arreterDefilementAuto);
 }
 
 // Place le carrousel sur la première vidéo d'un thème, s'il y en a une
@@ -642,7 +595,6 @@ function montrerTheme(theme) {
   var capsules = document.querySelectorAll("#liste-capsules .capsule");
   for (var index = 0; index < capsules.length; index++) {
     if (capsules[index].getAttribute("data-theme") === theme) {
-      arreterDefilementAuto();
       allerALaVideo(index);
       return;
     }

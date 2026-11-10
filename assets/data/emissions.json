@@ -67,6 +67,7 @@
   ],
 
   "videos_campagne": [
+    { "youtube_id": "rRCrG35d0z0", "titre": "Agir Ensemble Tour, épisode 1 : l'entrepreneuriat", "theme": "entrepreneuriat" },
     { "youtube_id": "af74Yb1eGBQ", "titre": "Le film de la campagne Agir Ensemble", "theme": "" },
     { "youtube_id": "ZsyuQevV5nE", "titre": "Agir ensemble pour connecter", "theme": "energie" },
     { "youtube_id": "q_OdWPV7tIc", "titre": "Agir ensemble pour innover", "theme": "entrepreneuriat" },
